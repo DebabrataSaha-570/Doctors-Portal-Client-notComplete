@@ -28,9 +28,8 @@ const Service = (props) => {
                 alt="Paella dish"
             />
             <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    {name}
-                </Typography>
+
+
                 <Typography variant="h5" component="div">
                     {name}
                 </Typography>

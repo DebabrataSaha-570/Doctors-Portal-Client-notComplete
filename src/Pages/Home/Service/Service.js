@@ -20,7 +20,7 @@ const Service = (props) => {
     );
 
     return (
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 275, border: 0, boxShadow: 0 }}>
             <CardMedia
                 component="img"
                 style={{ width: 'auto', height: '80px', margin: '0 auto' }}
@@ -31,15 +31,16 @@ const Service = (props) => {
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {name}
                 </Typography>
+                <Typography variant="h5" component="div">
+                    {name}
+                </Typography>
 
-                <Typography variant="body2">
+                <Typography variant="body2" color="text.secondary">
                     {description}
 
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button size="small">Learn More</Button>
-            </CardActions>
+
         </Card>
     );
 };

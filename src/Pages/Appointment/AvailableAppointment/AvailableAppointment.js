@@ -1,8 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import Booking from '../Booking/Booking';
 
 
@@ -52,7 +51,7 @@ const AvailableAppointment = ({ date }) => {
     return (
         <Container>
 
-            <h3>Available Appointments on {date.toDateString()}</h3>
+            <Typography variant='h5' sx={{ color: 'info.main', my: 2 }}>Available Appointments on {date.toDateString()}</Typography>
 
             <Grid container spacing={2}>
                 {
@@ -61,7 +60,7 @@ const AvailableAppointment = ({ date }) => {
 
             </Grid>
 
-        </Container>
+        </Container >
     );
 };
 

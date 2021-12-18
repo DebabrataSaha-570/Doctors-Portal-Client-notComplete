@@ -1,8 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
 
 const style = {
     position: 'absolute',
@@ -16,9 +17,19 @@ const style = {
     p: 4,
 };
 
-const BookingModal = ({ openBooking, handleBookingClose, booking }) => {
+const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
     const { name, time } = booking
 
+    const handleBookSubmit = (e) => {
+        e.preventDefault()
+
+        // collect data
+        // send to the server
+
+        handleBookingClose()
+        alert('Submitting')
+
+    }
     return (
         <Modal
             open={openBooking}
@@ -30,9 +41,42 @@ const BookingModal = ({ openBooking, handleBookingClose, booking }) => {
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     {name}
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    {time}
-                </Typography>
+
+                <form onSubmit={handleBookSubmit}>
+                    <TextField
+                        id="outlined-size-small"
+                        disabled
+                        sx={{ width: '90%', m: 1 }}
+                        defaultValue={time}
+                        size="small"
+                    />
+                    <TextField
+                        id="outlined-size-small"
+                        sx={{ width: '90%', m: 1 }}
+                        defaultValue="Your Name"
+                        size="small"
+                    />
+                    <TextField
+                        id="outlined-size-small"
+                        sx={{ width: '90%', m: 1 }}
+                        defaultValue="Phone Number"
+                        size="small"
+                    />
+                    <TextField
+                        id="outlined-size-small"
+                        sx={{ width: '90%', m: 1 }}
+                        defaultValue="Email Address"
+                        size="small"
+                    />
+                    <TextField
+                        id="outlined-size-small"
+                        disabled
+                        sx={{ width: '90%', m: 1 }}
+                        defaultValue={date.toDateString()}
+                        size="small"
+                    />
+                    <Button type="submit" sx={{ m: 1 }} variant="contained">Submit</Button>
+                </form>
             </Box>
         </Modal>
     );

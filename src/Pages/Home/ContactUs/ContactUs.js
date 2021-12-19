@@ -13,7 +13,7 @@ const contactBg = {
 
 const ContactUs = () => {
     return (
-        <Box style={contactBg} sx={{ my: 5, p: 3 }}>
+        <Box style={contactBg} sx={{ p: 3 }}>
             <Container>
                 <Box sx={{ my: 5 }}>
                     <Typography sx={{ color: 'info.main' }} variant="h6">

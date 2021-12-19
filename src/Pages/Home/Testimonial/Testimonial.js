@@ -33,8 +33,8 @@ const testimonials = [
 
 const Testimonial = () => {
     return (
-        <Container >
-            <Box sx={{ my: 5 }} style={{ textAlign: 'left' }}>
+        <Container sx={{ my: 5 }}  >
+            <Box style={{ textAlign: 'left' }}>
                 <Typography sx={{ color: 'info.main', fontWeight: 700 }} variant="h6">
                     Testimonial
                 </Typography>

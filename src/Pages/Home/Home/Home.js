@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from '../../Banner/Banner';
 import Navigation from '../../Shared/Navigation/Navigation';
 import AppointmentBanner from '../AppointmentBanner/AppointmentBanner';
+import ContactUs from '../ContactUs/ContactUs';
 import ExceptionalCare from '../ExceptionalCare/ExceptionalCare';
 import Gutter from '../Gutter/Gutter';
 import Services from '../Services/Services';
@@ -15,8 +16,9 @@ const Home = () => {
             <Gutter></Gutter>
             <Services></Services>
             <ExceptionalCare></ExceptionalCare>
-            <Testimonial></Testimonial>
             <AppointmentBanner></AppointmentBanner>
+            <Testimonial></Testimonial>
+            <ContactUs></ContactUs>
         </>
     );
 };

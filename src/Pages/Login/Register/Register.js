@@ -11,12 +11,12 @@ import login from '../../../images/login.png'
 import TextField from '@mui/material/TextField';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
-
+import Alert from '@mui/material/Alert';
 
 
 const Register = (props) => {
     const [loginData, setLoginData] = useState({})
-    const { registerUser, isLoading } = useAuth()
+    const { user, registerUser, isLoading, authError } = useAuth()
 
     const handleOnChange = (e) => {
         const field = e.target.name
@@ -83,6 +83,8 @@ const Register = (props) => {
                         {isLoading &&
                             <CircularProgress />
                         }
+                        {user?.email && <Alert severity="success">User created Successfully!!</Alert>}
+                        {authError && <Alert severity="error">{authError}</Alert>}
                     </Grid>
                     <Grid item xs={4} md={6}>
                         <img style={{ width: '100%' }} src={login} alt="" />

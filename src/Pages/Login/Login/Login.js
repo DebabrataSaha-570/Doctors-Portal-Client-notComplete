@@ -30,7 +30,6 @@ const Login = () => {
 
     return (
         <>
-            <Navigation></Navigation>
             <Container>
                 <Grid container spacing={2}>
                     <Grid sx={{ mt: 8 }} item xs={12} md={6} >

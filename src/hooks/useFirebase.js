@@ -7,32 +7,41 @@ import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, s
 initializeFirebase()
 const useFirebase = () => {
     const [user, setUser] = useState({})
+    const [isLoading, setIsLoading] = useState(false)
+
     const auth = getAuth()
 
     const registerUser = (email, password) => {
+        setIsLoading(true)
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                // ...
+                console.log(user)
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // ..
-            });
+                console.log(errorCode, errorMessage)
+            })
+            .finally(() => setIsLoading(false));
     }
     const loginUser = (auth, email, password) => {
+        setIsLoading(true)
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
                 setUser(user)
+                console.log(user)
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-            });
+                console.log(errorCode, errorMessage)
+
+            })
+            .finally(() => setIsLoading(false));
 
     }
 
@@ -46,16 +55,19 @@ const useFirebase = () => {
             } else {
                 setUser({})
             }
+            setIsLoading(false)
         });
         return () => unsubscribe;
     }, [])
 
     const logOut = () => {
+        setIsLoading(true)
         signOut(auth).then(() => {
             // Sign-out successful.
         }).catch((error) => {
             // An error happened.
-        });
+        })
+            .finally(() => setIsLoading(false));
     }
 
     return {
@@ -63,7 +75,8 @@ const useFirebase = () => {
         setUser,
         registerUser,
         logOut,
-        loginUser
+        loginUser,
+        isLoading
     }
 }
 

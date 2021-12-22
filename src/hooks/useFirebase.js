@@ -7,7 +7,7 @@ import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, s
 initializeFirebase()
 const useFirebase = () => {
     const [user, setUser] = useState({})
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [authError, setAuthError] = useState('')
     const auth = getAuth()
 
@@ -28,13 +28,15 @@ const useFirebase = () => {
             })
             .finally(() => setIsLoading(false));
     }
-    const loginUser = (email, password) => {
+    const loginUser = (email, password, location, history) => {
         setIsLoading(true)
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
                 setUser(user)
+                const destination = location?.state?.from || '/'
+                history.push(destination)
+
                 console.log(user)
                 setAuthError('')
             })

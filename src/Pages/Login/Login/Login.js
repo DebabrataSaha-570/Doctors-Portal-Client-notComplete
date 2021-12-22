@@ -3,13 +3,15 @@ import React, { useState } from 'react';
 import Navigation from '../../Shared/Navigation/Navigation';
 import login from '../../../images/login.png'
 import TextField from '@mui/material/TextField';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({})
     const { loginUser, user, isLoading, authError } = useAuth()
 
+    const location = useLocation()
+    const history = useHistory()
 
     const handleOnChange = (e) => {
         const field = e.target.name
@@ -25,7 +27,7 @@ const Login = () => {
     const handleLoginSubmit = (e) => {
         e.preventDefault()
         console.log(loginData)
-        loginUser(loginData.email, loginData.password)
+        loginUser(loginData.email, loginData.password, location, history)
     }
 
     return (

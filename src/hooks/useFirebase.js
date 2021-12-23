@@ -1,6 +1,6 @@
 import initializeFirebase from '../Pages/Login/Firebase/firebase.init'
 import { useState, useEffect } from 'react'
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 //Initialize Firebase app 
 
@@ -10,6 +10,8 @@ const useFirebase = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [authError, setAuthError] = useState('')
     const auth = getAuth()
+
+    const googleProvider = new GoogleAuthProvider();
 
     const registerUser = (email, password) => {
         setIsLoading(true)
@@ -51,6 +53,27 @@ const useFirebase = () => {
 
     }
 
+    const signInWithGoogle = (location, history) => {
+        setIsLoading(true)
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                const user = result.user;
+                setUser(user)
+                const destination = location?.state?.from || '/'
+                history.push(destination)
+
+                setAuthError('')
+
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                setAuthError(errorMessage)
+            })
+            .finally(() => setIsLoading(false));
+
+    }
+
     //observe user state. 
 
     useEffect(() => {
@@ -83,7 +106,8 @@ const useFirebase = () => {
         logOut,
         loginUser,
         isLoading,
-        authError
+        authError,
+        signInWithGoogle
     }
 }
 

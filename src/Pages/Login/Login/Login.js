@@ -8,7 +8,7 @@ import useAuth from '../../../hooks/useAuth';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({})
-    const { loginUser, user, isLoading, authError } = useAuth()
+    const { loginUser, user, isLoading, authError, signInWithGoogle } = useAuth()
 
     const location = useLocation()
     const history = useHistory()
@@ -30,13 +30,18 @@ const Login = () => {
         loginUser(loginData.email, loginData.password, location, history)
     }
 
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(location, history)
+
+    }
+
     return (
         <>
             <Container>
                 <Grid container spacing={2}>
                     <Grid sx={{ mt: 8 }} item xs={12} md={6} >
                         <Typography variant="body1" gutterBottom >Login</Typography>
-                        {!isLoading && <form onSubmit={handleLoginSubmit}>
+                        <form onSubmit={handleLoginSubmit}>
                             <TextField
                                 sx={{ width: '75%', m: 1 }}
                                 id="standard-basic"
@@ -58,12 +63,14 @@ const Login = () => {
                             <NavLink style={{ textDecoration: 'none' }} to="/register">
                                 <Button variant="text">New User? Please Register</Button>
                             </NavLink>
-                        </form>}
+                        </form>
                         {isLoading &&
                             <CircularProgress />
                         }
                         {user?.email && <Alert severity="success">User logged in  Successfully!!</Alert>}
                         {authError && <Alert severity="error">{authError}</Alert>}
+                        <p>-------------------------------------</p>
+                        <Button onClick={handleGoogleSignIn} variant="contained">Google Sign In</Button>
                     </Grid>
                     <Grid item xs={4} md={6}>
                         <img style={{ width: '100%' }} src={login} alt="" />

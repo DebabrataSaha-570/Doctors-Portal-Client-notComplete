@@ -31,6 +31,7 @@ import {
 import DashboardHome from '../DashboardHome/DashboardHome';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddDoctor from '../AddDoctor/AddDoctor';
+import useAuth from '../../../hooks/useAuth';
 
 
 const drawerWidth = 200;
@@ -39,6 +40,7 @@ function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [date, setDate] = React.useState(new Date())
+    const { admin } = useAuth()
 
     let { path, url } = useRouteMatch();
 
@@ -57,12 +59,15 @@ function Dashboard(props) {
             <Link style={{ textDecoration: 'none', }} to={`${url}`}>
                 <Button color="inherit">Dashboard</Button>
             </Link>
-            <Link style={{ textDecoration: 'none', }} to={`${url}/makeAdmin`}>
-                <Button color="inherit">Make Admin</Button>
-            </Link>
-            <Link style={{ textDecoration: 'none', }} to={`${url}/addDoctor`}>
-                <Button color="inherit">Add Doctor</Button>
-            </Link>
+            {admin && <Box>
+                <Link style={{ textDecoration: 'none', }} to={`${url}/makeAdmin`}>
+                    <Button color="inherit">Make Admin</Button>
+                </Link>
+                <Link style={{ textDecoration: 'none', }} to={`${url}/addDoctor`}>
+                    <Button color="inherit">Add Doctor</Button>
+                </Link>
+            </Box>
+            }
 
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (

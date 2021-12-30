@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
 import { TextField, Button, Alert } from '@mui/material';
-import useAuth from '../../../hooks/useAuth';
 
 
 const MakeAdmin = () => {
     const [email, setEmail] = useState('')
     const [success, setSuccess] = useState(false);
-    const { token } = useAuth()
-
 
     const handleOnBlur = (e) => {
         setEmail(e.target.value)
     }
     const handleAdmitSubmit = e => {
         const user = { email }
-        fetch('http://localhost:5000/users/admin', {
+        fetch('https://shielded-river-48943.herokuapp.com/users/admin', {
             method: 'PUT',
-            headers: {
-                'authorization': `Bearer ${token}`,
-                'content-type': 'application/json'
-            },
+            headers: { 'content-type': 'application/json' },
             body: JSON.stringify(user),
 
         })
@@ -47,7 +41,7 @@ const MakeAdmin = () => {
                     onBlur={handleOnBlur}
                     variant="standard" />
                 <Button type="submit" variant='contained'>Make Admin</Button>
-                {success && <Alert severity="success">Made Admin Successfully!!</Alert>}
+                {success && <Alert severity="success">Made Admin  Successfully!!</Alert>}
             </form>
         </div>
     );
